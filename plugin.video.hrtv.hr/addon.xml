@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.hrtv.hr"
+       name="Croatian TV on demand"
+       version="1.0.0" 
+       provider-name="Tomislav Rajnovic">
+  <requires>
+   <import addon="xbmc.python" version="2.1"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="hr">Video na zahtjev hrvatskih TV programa</summary>
+    <description lang="fr">Video na zahtjev hrvatskih TV programa</description>
+    <platform>all</platform>
+ <language>hr</language>
+ <email>trajnovic@gmail.com</email>
+  </extension>
+</addon>
