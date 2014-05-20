@@ -52,7 +52,7 @@ elif mode[0] == 'rtl':
 		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
 	
 	#2 xml
-	pat = '<a href="('+link+'/[\d]*/.*/)" title="([^"]*)">'
+	pat = '<a href="('+link+'/[\d]*/(?:[^/]*/){0,1})" title="([^"]*)">'
 	nl = re.findall( pat, doc, re.I)
 	nl.sort()
 	for n in nl:
