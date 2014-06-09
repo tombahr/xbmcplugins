@@ -93,7 +93,7 @@ elif mode[0] == 'htv':
 	if level==0: #lista emsija
 		pat = '<a href="('+link+'/[\w-]*)/">(.*)</a>'		
 	elif level==1: #lista epizoda
-		pat = r'<option value="(\d*)">([^<]*)' #(.*)</li>'
+		pat = r'<option(?: selected="selected")? value="(\d*)">([^<]*)' #(.*)</li>'
 	elif level ==2: #epizoda
 		pat= '<video data-url="([^"]*)"'
 	
