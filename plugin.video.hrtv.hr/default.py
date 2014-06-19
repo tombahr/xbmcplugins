@@ -29,7 +29,12 @@ if mode is None:
 	
 	url = build_url({'mode': 'htv', 'foldername': 'HTV na zahtjev', 'link':'http://www.hrt.hr/enz', 'level':0})
 	li = xbmcgui.ListItem('HTV na zahtjev', iconImage='DefaultFolder.png')
-	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)	
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
+	
+	url = build_url({'mode': 'hts'})
+	li = xbmcgui.ListItem('Uzivo', iconImage='DefaultFolder.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
+
 	xbmcplugin.endOfDirectory(addon_handle)
 	
 # RTL sada
@@ -129,3 +134,18 @@ elif mode[0] == 'rtlxmlll':
     li = xbmcgui.ListItem(foldername + ' Video', iconImage='DefaultVideo.png')
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     xbmcplugin.endOfDirectory(addon_handle)
+
+elif mode[0] == 'hts':
+	url = 'http://83.139.104.100/Content/HLS/Live/Channel(HTV1-lpdbr)/Stream(03)/index.m3u8'
+	li = xbmcgui.ListItem('HTV1', iconImage='DefaultVideo.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+	url = 'http://83.139.104.101/Content/HLS/Live/Channel(HTV2-abrdt)/Stream(03)/index.m3u8'
+	li = xbmcgui.ListItem('HTV2', iconImage='DefaultVideo.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+	url = 'http://83.139.104.101/Content/HLS/Live/Channel(HTV3-zzrte)/Stream(03)/index.m3u8'
+	li = xbmcgui.ListItem('HTV3', iconImage='DefaultVideo.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+	url = 'http://83.139.104.101/Content/HLS/Live/Channel(HTV4-miles)/Stream(03)/index.m3u8'
+	li = xbmcgui.ListItem('HTV4', iconImage='DefaultVideo.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
+	xbmcplugin.endOfDirectory(addon_handle)
