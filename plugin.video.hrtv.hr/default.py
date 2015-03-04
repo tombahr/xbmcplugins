@@ -27,7 +27,7 @@ if mode is None:
 	li = xbmcgui.ListItem('RTL sada', iconImage='DefaultFolder.png')
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)	
 	
-	url = build_url({'mode': 'htv', 'foldername': 'HTV na zahtjev', 'link':'http://www.hrt.hr/enz', 'level':0})
+	url = build_url({'mode': 'htv', 'foldername': 'HTV na zahtjev', 'link':'http://www.hrt.hr/enz/dnevnik/', 'level':0})
 	li = xbmcgui.ListItem('HTV na zahtjev', iconImage='DefaultFolder.png')
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
 	
@@ -96,7 +96,8 @@ elif mode[0] == 'htv':
 	pat = ''
 	folder = True
 	if level==0: #lista emsija
-		pat = '<a href="('+link+'/[\w-]*)/">(.*)</a>'		
+		linkemisije = '//www.hrt.hr/enz'
+		pat = '<a href="('+linkemisije+'/[\w-]*)/"><span>(.*)</span></a>'		
 	elif level==1: #lista epizoda
 		pat = r'<option(?: selected="selected")? value="(\d*)">([^<]*)' #(.*)</li>'
 	elif level ==2: #epizoda
@@ -114,7 +115,7 @@ elif mode[0] == 'htv':
 			link=olink+n[0]			
 			name=n[1]
 		elif level==0:			
-			link=n[0]+'/'
+			link='http:'+n[0]+'/'
 			name=n[1]
 		else:
 			link = n
