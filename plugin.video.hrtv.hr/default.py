@@ -23,7 +23,7 @@ rtllink = "http://www.rtl.hr"
 
 
 if mode is None:
-	url = build_url({'mode': 'rtl', 'foldername': 'RTL sada', 'link':'/rtl-sada'})
+	url = build_url({'mode': 'rtl', 'foldername': 'RTL sada', 'link':'http://www.rtl.hr/rtl-sada'})
 	li = xbmcgui.ListItem('RTL sada', iconImage='DefaultFolder.png')
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)	
 	
@@ -45,7 +45,7 @@ elif mode[0] == 'rtl':
 	###1 folder
 	#link = '/rtl-sada'
 	pat = r'<a href="('+link+'/[^/]*)/" title="([^"]*)">.*</a>'
-	doc = urllib.urlopen(rtllink+link).read()
+	doc = urllib.urlopen(link).read()
 	nl = re.findall( pat, doc, re.I)
 	
 	nl = list(set(nl))
@@ -56,23 +56,23 @@ elif mode[0] == 'rtl':
 		li = xbmcgui.ListItem(n[1], iconImage='DefaultFolder.png')
 		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
 	
-	#2 xml
+	#2 epizode
 	pat = '<a href="('+link+'/[\d]*/(?:[^/]*/){0,1})" title="([^"]*)">'
 	nl = re.findall( pat, doc, re.I)
 	nl.sort()
 	for n in nl:
-		url = build_url({'mode': 'rtlxml', 'foldername': n[1], 'link': n[0]+"?xml=1"})
+		url = build_url({'mode': 'rtlepizoda', 'foldername': n[1], 'link': n[0]})
 		li = xbmcgui.ListItem(n[1], iconImage='DefaultFolder.png')
 		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
 		
 	xbmcplugin.endOfDirectory(addon_handle)
 
-elif mode[0] == 'rtlxml':
+elif mode[0] == 'rtlepizoda':
 	#xbmc.Player().play(item='http://cdn-video1.rtl-hrvatska.hr/repository/media/f/7/f753f537136fac34d5af9c6433f71e9b.mp4?ver=1')
-	link = rtllink+args['link'][0]
+	link = args['link'][0]
 	foldername = args['foldername'][0]
 	#pat = '<video><!\[cdata\[(.*)\]\]></video>'
-	pat = '<video><!\[CDATA\[(.*)\]\]></video>'
+	pat = '{ "file": "([^"]*)"'
 	xml = urllib.urlopen(link).read()
 	matchObj = re.findall(pat, xml, re.I)
 	
@@ -88,6 +88,7 @@ elif mode[0] == 'rtlxml':
     
 	xbmcplugin.endOfDirectory(addon_handle)
 
+	
 #HTV enz
 elif mode[0] == 'htv':
 	level = int(args['level'][0])	
